@@ -32,8 +32,8 @@ class Kudos(BotPlugin):
         """This gives kudos"""
         if match:
             line = match.group(0)
-            username = line.split(' ')[0].rstrip('++').lower()
             kudos_count = self.update_kudos(username)
+            username = line.split(' ')[0].rstrip('+').lower()
 
             t = msg.frm.room if msg.is_group else msg.frm
             self.send(t,
