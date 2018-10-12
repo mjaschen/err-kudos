@@ -27,13 +27,14 @@ class Kudos(BotPlugin):
 
         return new_count
 
-    @re_botcmd(pattern=r'[\w-]+\+\+', prefixed=False, flags=re.IGNORECASE)
+    @re_botcmd(pattern=r'[\w-]+(\+){2,}', prefixed=False, flags=re.IGNORECASE)
     def give_kudos(self, msg, match):
         """This gives kudos"""
         if match:
             line = match.group(0)
-            kudos_count = self.update_kudos(username)
+            kudos_given = len(match.group(1))
             username = line.split(' ')[0].rstrip('+').lower()
+            kudos_count = self.update_kudos(username, kudos_given)
 
             t = msg.frm.room if msg.is_group else msg.frm
             self.send(t,
